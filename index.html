@@ -4,515 +4,90 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Империя Восходящей Крови — Свод Мира</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-
-:root{
-  --bg:            #0a0806;
-  --bg-panel:      #131009;
-  --bg-panel-2:    #1a1510;
-  --blood:         #6e1420;
-  --blood-bright:  #a01d2e;
-  --gold:          #a9884f;
-  --gold-bright:   #d4b06a;
-  --bone:          #e8e0cf;
-  --bone-dim:      #b3aa96;
-  --muted:         #78705f;
-  --violet:        #5c4a78;
-  --violet-bright: #8a70b8;
-  --moon:          #a8bdd0;
-  --line:          rgba(169,136,79,0.22);
-  --serif-display: 'Cinzel', serif;
-  --serif-body:    'EB Garamond', serif;
-}
-
-*{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  margin:0;
-  background:
-    radial-gradient(ellipse 900px 600px at 15% 0%, rgba(110,20,32,0.13), transparent 60%),
-    radial-gradient(ellipse 700px 500px at 100% 30%, rgba(92,74,120,0.10), transparent 60%),
-    var(--bg);
-  color:var(--bone);
-  font-family:var(--serif-body);
-  font-size:19px;
-  line-height:1.7;
-  overflow-x:hidden;
-}
-
-::selection{background:var(--blood-bright);color:var(--bone);}
-
-@media (prefers-reduced-motion: reduce){
-  *{animation-duration:0.001s !important; animation-iteration-count:1 !important; transition-duration:0.001s !important; scroll-behavior:auto !important;}
-}
-
-/* ---------- signature vein ---------- */
-.vein-wrap{
-  position:absolute;
-  left:26px;
-  top:0;
-  bottom:0;
-  width:2px;
-  z-index:1;
-  pointer-events:none;
-}
-.vein-line{
-  position:absolute;
-  left:0; top:0;
-  width:2px; height:100%;
-  background:linear-gradient(to bottom,
-    transparent 0%,
-    rgba(169,136,79,0.35) 3%,
-    rgba(169,136,79,0.35) 97%,
-    transparent 100%);
-}
-.vein-pulse{
-  position:absolute;
-  left:50%;
-  width:9px; height:9px;
-  margin-left:-4.5px;
-  border-radius:50%;
-  background:var(--blood-bright);
-  box-shadow:0 0 10px 3px rgba(160,29,46,0.65), 0 0 22px 8px rgba(160,29,46,0.25);
-  animation:flow 9s linear infinite;
-}
-@keyframes flow{
-  0%{top:0%; opacity:0;}
-  4%{opacity:1;}
-  96%{opacity:1;}
-  100%{top:100%; opacity:0;}
-}
-@media (max-width:780px){
-  .vein-wrap{left:12px;}
-}
-
-/* ---------- layout shells ---------- */
-.page{position:relative; max-width:880px; margin:0 auto; padding:0 32px 0 68px;}
-@media (max-width:780px){
-  .page{padding:0 20px 0 42px;}
-}
-section{padding:110px 0; border-bottom:1px solid var(--line);}
-section:last-of-type{border-bottom:none;}
-
-.eyebrow{
-  font-family:var(--serif-display);
-  font-size:13px;
-  letter-spacing:0.22em;
-  color:var(--gold);
-  text-transform:uppercase;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:18px;
-}
-.eyebrow::before{
-  content:"";
-  width:7px; height:7px;
-  border-radius:50%;
-  background:var(--blood-bright);
-  box-shadow:0 0 8px 2px rgba(160,29,46,0.55);
-  flex-shrink:0;
-}
-
-h1,h2,h3{font-family:var(--serif-display); font-weight:600; color:var(--bone); margin:0;}
-h2{font-size:clamp(28px,4vw,40px); letter-spacing:0.01em; margin-bottom:28px;}
-h3{font-size:20px; color:var(--gold-bright); font-weight:500; letter-spacing:0.02em;}
-p{margin:0 0 20px 0; color:var(--bone-dim);}
-p:last-child{margin-bottom:0;}
-strong{color:var(--bone); font-weight:600;}
-em.tag{font-style:normal; color:var(--gold-bright);}
-a{color:var(--gold-bright);}
-
-.reveal{opacity:0; transform:translateY(22px); transition:opacity 0.9s ease, transform 0.9s ease;}
-.reveal.in{opacity:1; transform:translateY(0);}
-
-/* ---------- hero ---------- */
-.hero{
-  min-height:100svh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:80px 0;
-  border-bottom:1px solid var(--line);
-  position:relative;
-}
-.hero-crest{
-  width:64px; height:64px;
-  margin-bottom:36px;
-  opacity:0.92;
-}
-.hero-eyebrow{
-  font-family:var(--serif-display);
-  font-size:13px;
-  letter-spacing:0.35em;
-  text-transform:uppercase;
-  color:var(--blood-bright);
-  margin-bottom:22px;
-}
-.hero h1{
-  font-size:clamp(38px,7vw,74px);
-  line-height:1.05;
-  letter-spacing:0.01em;
-  background:linear-gradient(115deg, var(--bone) 20%, var(--gold-bright) 55%, var(--bone) 85%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-.hero .sub{
-  margin-top:28px;
-  max-width:560px;
-  font-size:20px;
-  font-style:italic;
-  color:var(--bone-dim);
-}
-.hero .lede{
-  margin-top:34px;
-  max-width:600px;
-  font-size:17px;
-  color:var(--muted);
-}
-.scroll-cue{
-  position:absolute;
-  bottom:36px; left:0;
-  font-size:12px;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:var(--muted);
-  display:flex; align-items:center; gap:10px;
-}
-.scroll-cue .bar{width:1px; height:34px; background:linear-gradient(to bottom, var(--gold), transparent); animation:pulseBar 2.4s ease-in-out infinite;}
-@keyframes pulseBar{0%,100%{opacity:0.3;} 50%{opacity:1;}}
-
-/* ---------- lists ---------- */
-ul.plain{list-style:none; margin:0; padding:0;}
-ul.plain li{
-  position:relative;
-  padding-left:22px;
-  margin-bottom:14px;
-  color:var(--bone-dim);
-}
-ul.plain li::before{
-  content:"—";
-  position:absolute; left:0; top:0;
-  color:var(--gold);
-}
-
-.callout{
-  border-left:2px solid var(--blood-bright);
-  background:linear-gradient(90deg, rgba(110,20,32,0.10), transparent 70%);
-  padding:18px 24px;
-  margin:28px 0;
-  font-style:italic;
-  color:var(--bone-dim);
-}
-
-/* ---------- race cards ---------- */
-.race-grid{display:grid; grid-template-columns:1fr; gap:2px; margin-top:36px;}
-.race-card{
-  background:var(--bg-panel);
-  border-left:3px solid var(--muted);
-  padding:26px 28px;
-  transition:background 0.3s ease, border-color 0.3s ease;
-}
-.race-card:hover{background:var(--bg-panel-2);}
-.race-card.pure{border-left-color:var(--gold-bright);}
-.race-card.beast{border-left-color:#8a5a3a;}
-.race-card.demon{border-left-color:var(--violet-bright);}
-.race-card.elf{border-left-color:var(--moon);}
-.race-card.half{border-left-color:var(--bone-dim);}
-.race-head{display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:10px;}
-.race-name{font-family:var(--serif-display); font-size:21px; color:var(--bone); font-weight:600;}
-.race-status{font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted);}
-.race-card.pure .race-status{color:var(--gold-bright);}
-.race-card.elf .race-status{color:var(--moon);}
-.race-card.demon .race-status{color:var(--violet-bright);}
-.race-card p{margin:0; font-size:17px;}
-
-/* ---------- bloodline branch diagram ---------- */
-.branch-wrap{margin:44px 0 8px 0;}
-.branch-svg{width:100%; height:auto; display:block;}
-
-/* ---------- power/council ---------- */
-.council-grid{display:grid; grid-template-columns:1fr; gap:24px; margin-top:8px;}
-@media(min-width:680px){.council-grid{grid-template-columns:1fr 1fr;}}
-.council-card{
-  border:1px solid var(--line);
-  padding:24px;
-  background:rgba(92,74,120,0.05);
-}
-.council-card h3{margin-bottom:12px; font-size:17px;}
-.council-card p{font-size:16.5px; margin-bottom:0;}
-
-/* ---------- conflict tiers ---------- */
-.tier{
-  display:grid;
-  grid-template-columns:56px 1fr;
-  gap:22px;
-  padding:26px 0;
-  border-top:1px solid var(--line);
-}
-.tier:first-of-type{border-top:none;}
-.tier-mark{
-  font-family:var(--serif-display);
-  font-size:26px;
-  color:var(--blood-bright);
-  opacity:0.85;
-}
-.tier h3{margin-bottom:8px;}
-.tier p{margin-bottom:0;}
-
-/* ---------- hooks ---------- */
-.hook-grid{display:grid; grid-template-columns:1fr; gap:16px; margin-top:8px;}
-@media(min-width:680px){.hook-grid{grid-template-columns:1fr 1fr;}}
-.hook-card{
-  padding:22px 24px;
-  background:var(--bg-panel);
-  border-top:2px solid var(--gold);
-  font-size:16.5px;
-  color:var(--bone-dim);
-}
-
-/* ---------- events strip ---------- */
-.event-list{margin-top:8px;}
-.event-item{
-  display:flex; gap:18px;
-  padding:20px 0;
-  border-top:1px dashed var(--line);
-}
-.event-item:first-child{border-top:none;}
-.event-item .mark{color:var(--blood-bright); font-size:20px; line-height:1.5;}
-.event-item p{margin:0; font-size:16.5px;}
-
-/* ---------- footer ---------- */
-footer{
-  padding:70px 0 100px 0;
-  color:var(--muted);
-  font-size:14.5px;
-  font-style:italic;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="vein-wrap" aria-hidden="true"><div class="vein-line"></div><div class="vein-pulse"></div></div>
 
-<div class="vein-wrap" aria-hidden="true">
-  <div class="vein-line"></div>
-  <div class="vein-pulse"></div>
+<div class="topnav">
+  <a class="brand" href="index.html">ИВК · СВОД</a>
+  <a class="link" href="siuzhet.html">Сюжет</a>
+  <a class="link" href="imperator.html">Император</a>
+  <a class="link" href="garem.html">Гарем</a>
+  <a class="link" href="dvorets.html">Дворец</a>
+  <a class="link" href="mir.html">Карта мира</a>
+  <a class="link" href="imperiya.html">Устройство Империи</a>
+  <a class="link" href="aristokratiya.html">Аристократия</a>
+  <a class="link" href="zakony.html">Законы</a>
+  <a class="link" href="kalendar.html">Календарь и вера</a>
 </div>
 
 <div class="page">
 
-  <!-- HERO -->
-  <section class="hero">
-    <svg class="hero-crest" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M32 4 L54 16 V38 C54 50 44 58 32 60 C20 58 10 50 10 38 V16 Z" stroke="#a9884f" stroke-width="1.4"/>
-      <path d="M32 14 C32 26 22 26 22 36 C22 44 27 48 32 50 C37 48 42 44 42 36 C42 26 32 26 32 14Z" fill="#6e1420" stroke="#a01d2e" stroke-width="1"/>
-    </svg>
-    <div class="hero-eyebrow">Свод Мира · Игровая библия</div>
+  <section class="pagehero">
+    <div class="kicker">Свод Мира · Игровая библия</div>
     <h1>Империя<br>Восходящей Крови</h1>
     <p class="sub">Там, где право властвовать течёт по венам, а не даётся указом.</p>
-    <p class="lede">Мир для текстовой ролевой игры: тиран на троне, гарем как институт власти, расы, разделённые не столько силой, сколько правом её иметь — и тайный совет, который решает, кому дозволено быть сильным.</p>
-    <div class="scroll-cue"><div class="bar"></div>Пролистать свод</div>
+    <p style="max-width:620px; margin-top:22px; color:var(--muted); font-size:16.5px;">
+      Гарем — лишь одна из комнат в куда большем доме. Здесь же — трон, интриги, дворец, законы, вера и карта мира, в котором разворачивается история.
+    </p>
   </section>
 
-  <!-- I. CONCEPT -->
   <section class="reveal">
-    <div class="eyebrow">Глава I · Суть</div>
-    <h2>Кровь как закон</h2>
-    <p>Чистокровные люди — раса, что правит не по договору, а по природе: они живут дольше, крепче телом и владеют магией крови, недоступной прочим. Все прочие разумные — зверолюди, полудемоны, эльфы, полукровки — официально признаны «низшими» и подчинены закону, писанному не ими.</p>
-    <p>На вершине этого порядка — Император, чей гарем является не прихотью, а официальным политическим институтом: покои и трон здесь неотделимы друг от друга. Он же — то немногое, что удерживает систему от распада.</p>
-    <div class="callout">Система трещит. И каждый — раб, наложница, генерал или сам Император — рано или поздно вынужден выбрать сторону.</div>
-  </section>
-
-  <!-- II. HISTORY -->
-  <section class="reveal">
-    <div class="eyebrow">Глава II · Мир и история</div>
-    <h2>Раскол Крови</h2>
-    <p>Триста-четыреста лет назад расы жили в относительном равенстве. Затем чистокровные люди овладели ритуалом <strong>Печати Крови</strong> — магией, что закрепляет и усиливает наследственную силу через строгий контроль над тем, с кем размножается правящий класс.</p>
-    <p>Так родилась идеология чистоты: чем чище линия — тем длиннее жизнь, тем крепче магия, тем выше место у трона. Прочие расы были объявлены «смешанными» и «звериными» — то есть неполноценными — и постепенно закабалены под предлогом порядка.</p>
-
-    <h3 style="margin-top:44px; margin-bottom:16px;">Почему это держится по сей день</h3>
-    <ul class="plain">
-      <li>Элитные легионы состоят исключительно из чистокровных магов крови.</li>
-      <li>Культ Первой Крови учит, что императорская линия — буквально божественный сосуд.</li>
-      <li>Труд «низших» рас — фундамент экономики: шахты, армия, ремёсла, служба в гареме.</li>
-    </ul>
-
-    <h3 style="margin-top:44px; margin-bottom:16px;">Что трещит по швам прямо сейчас</h3>
-    <ul class="plain">
-      <li>Среди «низших» рождаются те, кто несёт Силу Крови — то, что теоретически невозможно.</li>
-      <li>Кочевые зверолюди и кланы полудемонов впервые за века объединяются.</li>
-      <li>Не вся аристократия согласна с системой — часть двора видит в чистоте крови путь к вырождению.</li>
-      <li>Наложницы гарема — заложницы, послы и шпионки покорённых народов, у каждой свой расчёт.</li>
-    </ul>
-  </section>
-
-  <!-- III. RACES -->
-  <section class="reveal">
-    <div class="eyebrow">Глава III · Расы</div>
-    <h2>Кровь и её носители</h2>
-    <p>Статус расы не равен статусу персонажа. Полудемон-генерал может держать в руках больше реальной власти, чем захудалый чистокровный дворянин — но закон всё равно ставит его ниже. Именно в этом зазоре и рождается драма.</p>
-
-    <div class="race-grid">
-      <div class="race-card pure">
-        <div class="race-head"><span class="race-name">Чистокровные люди</span><span class="race-status">Правящий класс</span></div>
-        <p>Долгожители — 200–400 лет благодаря магии крови. Но сила даётся не всем поровну: она зависит от чистоты и «качества» родовой линии, а не просто от факта рождения человеком.</p>
-      </div>
-      <div class="race-card beast">
-        <div class="race-head"><span class="race-name">Зверолюди</span><span class="race-status">Низшие · уважаемы за силу</span></div>
-        <p>Звериные черты — уши, хвосты, когти. Физическая мощь, клановая культура, короткий век — 60–80 лет.</p>
-      </div>
-      <div class="race-card demon">
-        <div class="race-head"><span class="race-name">Полудемоны</span><span class="race-status">Низшие · презираемы и страшны</span></div>
-        <p>Остаточная демоническая магия, нестабильная и опасная. Дискриминация доходит до открытой охоты на них.</p>
-      </div>
-      <div class="race-card elf">
-        <div class="race-head"><span class="race-name">Эльфы</span><span class="race-status">Формально нейтральны</span></div>
-        <p>Живут у Серебряных гор, откуда стекает лунная кровь — по преданию, кровь убитой на вершине богини Луны. Миролюбивы, безгосударственны, признаны империей нейтральными. Долголетие обрели, приняв лунную кровь в себя.</p>
-      </div>
-      <div class="race-card half">
-        <div class="race-head"><span class="race-name">Полукровки</span><span class="race-status">Пограничный статус</span></div>
-        <p>Носят в себе лишь около <strong>20–30%</strong> силы более мощной из родительских рас. Живут дольше чистых «низших» — но не признаны чистокровными. Свои среди чужих в обоих мирах.</p>
-      </div>
-    </div>
-
-    <div class="branch-wrap">
-      <svg class="branch-svg" viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
-        <path d="M400 0 V40" stroke="#a9884f" stroke-width="2"/>
-        <path d="M400 40 C400 70, 90 60, 70 130" stroke="#8a5a3a" stroke-width="1.6" fill="none"/>
-        <path d="M400 40 C400 70, 260 60, 240 130" stroke="#8a70b8" stroke-width="1.6" fill="none"/>
-        <path d="M400 40 L400 130" stroke="#d4b06a" stroke-width="2" fill="none"/>
-        <path d="M400 40 C400 70, 540 60, 560 130" stroke="#a8bdd0" stroke-width="1.6" fill="none"/>
-        <path d="M400 40 C400 70, 730 60, 730 130" stroke="#b3aa96" stroke-width="1.6" fill="none"/>
-        <circle cx="400" cy="40" r="5" fill="#a01d2e"/>
-        <circle cx="70" cy="132" r="3.5" fill="#8a5a3a"/>
-        <circle cx="240" cy="132" r="3.5" fill="#8a70b8"/>
-        <circle cx="400" cy="132" r="3.5" fill="#d4b06a"/>
-        <circle cx="560" cy="132" r="3.5" fill="#a8bdd0"/>
-        <circle cx="730" cy="132" r="3.5" fill="#b3aa96"/>
-        <text x="70" y="150" fill="#78705f" font-size="11" text-anchor="middle" font-family="EB Garamond, serif">Зверолюди</text>
-        <text x="240" y="150" fill="#78705f" font-size="11" text-anchor="middle" font-family="EB Garamond, serif">Полудемоны</text>
-        <text x="400" y="150" fill="#78705f" font-size="11" text-anchor="middle" font-family="EB Garamond, serif">Чистокровные</text>
-        <text x="560" y="150" fill="#78705f" font-size="11" text-anchor="middle" font-family="EB Garamond, serif">Эльфы</text>
-        <text x="730" y="150" fill="#78705f" font-size="11" text-anchor="middle" font-family="EB Garamond, serif">Полукровки</text>
-      </svg>
+    <div class="eyebrow">Разделы свода</div>
+    <h2>С чего начать чтение</h2>
+    <div class="hub-grid">
+      <a class="hub-card" href="siuzhet.html">
+        <div class="num">I</div>
+        <h3>Сюжет</h3>
+        <p>Три яруса конфликта, тлеющее наследие мачехи и то, к чему всё движется.</p>
+      </a>
+      <a class="hub-card" href="imperator.html">
+        <div class="num">II</div>
+        <h3>Император</h3>
+        <p>Единственный законный наследник. Детство в страхе. Тиран, у которого есть причина.</p>
+      </a>
+      <a class="hub-card" href="garem.html">
+        <div class="num">III</div>
+        <h3>Гарем</h3>
+        <p>Золотая клетка, смотрительница, тайные осведомительницы и политика без оружия.</p>
+      </a>
+      <a class="hub-card" href="dvorets.html">
+        <div class="num">IV</div>
+        <h3>Императорский дворец</h3>
+        <p>Архитектура власти: тронные залы, сады, темницы, тайные ходы.</p>
+      </a>
+      <a class="hub-card" href="mir.html">
+        <div class="num">V</div>
+        <h3>Карта мира</h3>
+        <p>Соседние земли и государства — кратко, без лишней тяжести.</p>
+      </a>
+      <a class="hub-card" href="imperiya.html">
+        <div class="num">VI</div>
+        <h3>Устройство Империи</h3>
+        <p>Столица, провинции, экономика, культура и жизнь простого населения.</p>
+      </a>
+      <a class="hub-card" href="aristokratiya.html">
+        <div class="num">VII</div>
+        <h3>Аристократия</h3>
+        <p>Титулы, великие дома, государственные должности и их носители.</p>
+      </a>
+      <a class="hub-card" href="zakony.html">
+        <div class="num">VIII</div>
+        <h3>Свод законов</h3>
+        <p>Древний рукописный свод — статьи, по которым живёт Империя.</p>
+      </a>
+      <a class="hub-card" href="kalendar.html">
+        <div class="num">IX</div>
+        <h3>Календарь и вера</h3>
+        <p>Летоисчисление от Раскола Крови, культы и то, во что здесь верят.</p>
+      </a>
     </div>
   </section>
 
-  <!-- IV. POWER & COUNCIL -->
-  <section class="reveal">
-    <div class="eyebrow">Глава IV · Сила, гены и Совет Древних</div>
-    <h2>Кто дозволяет силу</h2>
-    <p>Сила распределена неровно даже среди чистокровных — ей управляют. Магия крови не выдаётся вместе с рождением: есть могущественные дома, а есть чистокровные почти без дара. Именно поэтому чистота линии так важна аристократии — это единственная гарантия, что сила останется «где положено».</p>
-
-    <div class="council-grid">
-      <div class="council-card">
-        <h3>Тайный Совет Древних</h3>
-        <p>Немногочисленная, крайне закрытая группа сильнейших и старейших — возможно, старше самой императорской династии. Тайно отслеживает всплески значительной силы вне зависимости от происхождения.</p>
-      </div>
-      <div class="council-card">
-        <h3>Условие</h3>
-        <p>Присягнуть, войти под контроль дома, отдать себя на службу империи — либо быть уничтоженным. Особенно если сила проявилась у простолюдина, полукровки или «низшего».</p>
-      </div>
-      <div class="council-card">
-        <h3>Логика жестокости</h3>
-        <p>Не снобизм, а страх перед нестабильностью: неконтролируемая сила вне системы лояльности способна расшатать всю иерархию.</p>
-      </div>
-      <div class="council-card">
-        <h3>Император — вершина</h3>
-        <p>Не просто самый статусный — объективно самый мощный из живущих. Казнь непокорных — часть его роли, а не эксцесс: то, что укрепляет миф о нём как о живом воплощении силы крови.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- V. WARS & EVENTS -->
-  <section class="reveal">
-    <div class="eyebrow">Глава V · Войны и события</div>
-    <h2>Мир не стоит на месте</h2>
-    <p>Приграничные конфликты, восстания и дипломатические кризисы вспыхивают периодически как отдельные события — независимо от повседневных придворных интриг.</p>
-    <div class="event-list">
-      <div class="event-item"><span class="mark">✦</span><p>Тлеющий конфликт на границе с землями зверолюдов и полудемонов.</p></div>
-      <div class="event-item"><span class="mark">✦</span><p>Угроза со стороны того, кто нарушил условия Совета Древних и не был вовремя уничтожен.</p></div>
-      <div class="event-item"><span class="mark">✦</span><p>Внутренний дворцовый кризис — заговор, покушение, скандал в гареме, способный перерасти в открытое противостояние.</p></div>
-    </div>
-  </section>
-
-  <!-- VI. EMPEROR -->
-  <section class="reveal">
-    <div class="eyebrow">Глава VI · Император</div>
-    <h2>Тиран на троне</h2>
-    <p>Харизма, абсолютная уверенность, лёгкая жестокость как стиль правления — но за этим стоит выбор, а не просто нрав.</p>
-    <ul class="plain">
-      <li>Не верит в идеологию чистоты крови, но не может разрушить её, не разрушив империю вместе с ней.</li>
-      <li>Последний, в ком кровь по-настоящему сильна — прочая аристократия слабеет, и он это скрывает.</li>
-      <li>Гарем для него — не удовольствие, а клетка: каждая наложница — сделка, которую он не выбирал.</li>
-    </ul>
-    <div class="callout">Альковные покои и тронный зал здесь неотделимы друг от друга — каждая наложница представляет фракцию, народ или интерес.</div>
-  </section>
-
-  <!-- VII. HAREM -->
-  <section class="reveal">
-    <div class="eyebrow">Глава VII · Гарем как институт</div>
-    <h2>Политика в шёлке</h2>
-    <p>Чтобы гарем не оставался фоном, а давал почву для сюжета:</p>
-    <ul class="plain">
-      <li>Каждая наложница входит в гарем по своей причине — дипломатический заложник, дочь мятежного дома, шпионка «низшей» расы, авантюристка, ищущая власти изнутри.</li>
-      <li>Иерархия внутри гарема — отдельная политика: фаворитки, соперничество, союзы.</li>
-      <li>Собственные правила игры — право аудиенции раз в сезон, право на одну милость — дают механику для интриг.</li>
-    </ul>
-  </section>
-
-  <!-- VIII. CENTRAL CONFLICT -->
-  <section class="reveal">
-    <div class="eyebrow">Глава VIII · Центральный конфликт</div>
-    <h2>Три яруса угнетения</h2>
-    <div class="tier">
-      <div class="tier-mark">I</div>
-      <div><h3>Личный</h3><p>Персонажи «низших» рас во дворце, армии, гареме ежедневно сталкиваются с системой — унижения, ограничения в правах, необходимость доказывать ценность вдвое усерднее.</p></div>
-    </div>
-    <div class="tier">
-      <div class="tier-mark">II</div>
-      <div><h3>Политический</h3><p>Реформисты против традиционалистов при дворе. Император — в центре, вынужден лавировать между ними.</p></div>
-    </div>
-    <div class="tier">
-      <div class="tier-mark">III</div>
-      <div><h3>Мировой</h3><p>Восстание и объединение «низших» рас за пределами столицы нарастает — рано или поздно война или переворот станут неизбежны.</p></div>
-    </div>
-  </section>
-
-  <!-- IX. PLAYER HOOKS -->
-  <section class="reveal">
-    <div class="eyebrow">Глава IX · Крючки для игроков</div>
-    <h2>С кого начать</h2>
-    <div class="hook-grid">
-      <div class="hook-card">Наложница-шпионка, балансирующая между верностью своему народу и растущей привязанностью ко двору.</div>
-      <div class="hook-card">Чистокровный аристократ-реформист, рискующий репутацией и жизнью ради смягчения законов.</div>
-      <div class="hook-card">Генерал-зверочеловек, чья лояльность империи держится на тонкой нити личной чести.</div>
-      <div class="hook-card">Полудемон при дворе, скрывающий природу своей силы — её раскрытие означает казнь.</div>
-      <div class="hook-card">Тайный агент пограничного восстания, внедрённый во дворец под видом слуги.</div>
-      <div class="hook-card">Эльф из рода у Серебряных гор, присланный как «нейтральный» посредник — но его лунная кровь ведёт себя не совсем так, как положено по преданиям, и это привлекает внимание Совета Древних.</div>
-    </div>
-  </section>
-
-  <footer>
-    Свод открыт для дополнений: карта империи, календарь и культы, дома аристократии, механика отношений при дворе.
-  </footer>
-
+  <footer>Свод открыт для дополнений — каждая часть связана с остальными.</footer>
 </div>
 
-<script>
-  const els = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window){
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, {threshold:0.08, rootMargin:'0px 0px -60px 0px'});
-    els.forEach(el=>io.observe(el));
-  } else {
-    els.forEach(el=>el.classList.add('in'));
-  }
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>

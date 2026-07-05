@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карта мира — Империя Восходящей Крови</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="vein-wrap" aria-hidden="true"><div class="vein-line"></div><div class="vein-pulse"></div></div>
+
+<div class="topnav">
+  <a class="brand" href="index.html">ИВК · СВОД</a>
+  <a class="link" href="siuzhet.html">Сюжет</a>
+  <a class="link" href="imperator.html">Император</a>
+  <a class="link" href="garem.html">Гарем</a>
+  <a class="link" href="dvorets.html">Дворец</a>
+  <a class="link active" href="mir.html">Карта мира</a>
+  <a class="link" href="imperiya.html">Устройство Империи</a>
+  <a class="link" href="aristokratiya.html">Аристократия</a>
+  <a class="link" href="zakony.html">Законы</a>
+  <a class="link" href="kalendar.html">Календарь и вера</a>
+</div>
+
+<div class="page">
+
+  <section class="pagehero">
+    <div class="kicker">Раздел V</div>
+    <h1>Карта мира</h1>
+    <p class="sub">Империя — не единственная сила на карте. Просто самая уверенная в себе.</p>
+  </section>
+
+  <section class="reveal">
+    <svg class="map-svg" viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="800" height="460" fill="#0d0a07"/>
+      <path d="M300 90 C420 70 520 110 560 200 C600 290 540 380 430 400 C320 420 230 380 210 290 C190 200 200 110 300 90Z" fill="#6e1420" opacity="0.35" stroke="#a01d2e" stroke-width="1.5"/>
+      <text x="380" y="240" text-anchor="middle" class="map-label" fill="#d4b06a" font-size="15" font-family="Cinzel, serif">ИМПЕРИЯ</text>
+
+      <path d="M40 130 C110 100 170 140 180 200 C190 260 130 300 70 290 C20 280 -10 190 40 130Z" fill="#3a2a3a" opacity="0.35" stroke="#8a70b8" stroke-width="1.2"/>
+      <text x="90" y="200" text-anchor="middle" class="map-label" font-size="12">Пепельные Пустоши</text>
+
+      <path d="M600 60 C670 40 730 70 740 120 C750 170 700 200 650 190 C600 180 560 90 600 60Z" fill="#2a3a3a" opacity="0.35" stroke="#a8bdd0" stroke-width="1.2"/>
+      <text x="670" y="130" text-anchor="middle" class="map-label" font-size="12">Серебряные Горы</text>
+
+      <path d="M60 320 C130 300 190 330 210 370 C230 410 170 440 110 430 C50 420 10 350 60 320Z" fill="#3a3a2a" opacity="0.35" stroke="#8a5a3a" stroke-width="1.2"/>
+      <text x="120" y="380" text-anchor="middle" class="map-label" font-size="12">Степной Союз</text>
+
+      <path d="M560 330 C630 310 690 340 700 380 C710 410 660 430 610 420 C560 410 500 355 560 330Z" fill="#2a2a3a" opacity="0.35" stroke="#78705f" stroke-width="1.2"/>
+      <text x="610" y="390" text-anchor="middle" class="map-label" font-size="12">Королевство Друвель</text>
+
+      <path d="M350 400 C420 390 470 410 480 430 C490 445 440 455 390 450 C340 445 300 410 350 400Z" fill="#3a3020" opacity="0.35" stroke="#d4b06a" stroke-width="1.2"/>
+      <text x="410" y="435" text-anchor="middle" class="map-label" font-size="12">Вольные Топи</text>
+    </svg>
+    <p style="text-align:center; color:var(--muted); font-size:14px; font-style:italic;">Условная схема — не географическая точность, а расклад сил</p>
+  </section>
+
+  <section class="reveal">
+    <div class="eyebrow">Соседи</div>
+    <h2>Земли за пределами Империи</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>Королевство Друвель</h3>
+        <p>Старый враг Империи на западной границе. Никакой магии крови — ставка на сталь, рыцарские ордена и упрямую веру в то, что доблесть важнее происхождения. Пограничные стычки случаются регулярно, полномасштабной войны не было уже поколение.</p>
+      </div>
+      <div class="card">
+        <h3>Вольные Топи</h3>
+        <p>Конфедерация торговых городов на юге — формально независимая, фактически живущая на деньги всех, с кем торгует, включая саму Империю. Нейтральная территория интриг, куда стекаются те, кому нужно исчезнуть или продать секрет.</p>
+      </div>
+      <div class="card">
+        <h3>Пепельные Пустоши</h3>
+        <p>Спорные земли на северо-западе, слабо подчиняющиеся чьей-либо власти. Здесь селятся полудемоны и те, кому нет места в других странах. Империя считает Пустоши источником беспорядка — и время от времени посылает туда легионы «наводить порядок».</p>
+      </div>
+      <div class="card">
+        <h3>Степной Союз</h3>
+        <p>Объединение клановых родов зверолюдов на юго-западных равнинах. Исторически враждовали друг с другом — та самая консолидация, о которой всё чаще шепчутся при дворе, происходит именно здесь.</p>
+      </div>
+      <div class="card">
+        <h3>Серебряные Горы</h3>
+        <p>Формально не государство — территория эльфов, признанная Империей нейтральной. Никто не оспаривает их земли, но и полноценного посольства между сторонами не существует: слишком разные представления о времени и власти.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>Подробнее об устройстве самой Империи — в следующем разделе.</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
