@@ -57,7 +57,29 @@ function initBloodText(){
   }
 }
 
+// hover glow: wrap words so each one can light up under the cursor
+function initHoverGlow(){
+  const selector = '.page h2, .page h3, .page h4, .page p:not(.blood-text), .page li, .callout';
+  document.querySelectorAll(selector).forEach(el=>{
+    if(el.dataset.hoverified) return;
+    el.dataset.hoverified = "1";
+    const parts = el.textContent.split(/(\s+)/);
+    el.textContent = '';
+    parts.forEach(part=>{
+      if(part.trim() === ''){
+        el.appendChild(document.createTextNode(part));
+      } else {
+        const span = document.createElement('span');
+        span.className = 'hoverword';
+        span.textContent = part;
+        el.appendChild(span);
+      }
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
   initReveal();
   initBloodText();
+  initHoverGlow();
 });

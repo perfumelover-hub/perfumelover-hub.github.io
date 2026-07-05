@@ -40,6 +40,18 @@ body{
   *{animation-duration:0.001s !important; animation-iteration-count:1 !important; transition-duration:0.001s !important; scroll-behavior:auto !important;}
 }
 
+.site-wrap{position:relative;}
+
+/* hover glow on all body text */
+.hoverword{transition:color 0.28s ease, text-shadow 0.28s ease; cursor:default;}
+.hoverword:hover{
+  color:var(--blood-bright);
+  text-shadow:0 0 8px rgba(160,29,46,0.6), 0 0 20px rgba(160,29,46,0.28);
+}
+.scroll-frame .hoverword:hover{
+  color:#ff5a63;
+  text-shadow:0 0 8px rgba(255,90,99,0.55), 0 0 18px rgba(255,90,99,0.25);
+}
 /* vein */
 .vein-wrap{position:absolute; left:26px; top:0; bottom:0; width:2px; z-index:1; pointer-events:none;}
 .vein-line{position:absolute; left:0; top:0; width:2px; height:100%;
