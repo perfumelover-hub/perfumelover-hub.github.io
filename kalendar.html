@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Календарь и вера — Империя Восходящей Крови</title>
-<link rel="stylesheet" href="style.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Календарь и вера — Империя Восходящей Крови</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.wheel-wrap{display:flex; justify-content:center; margin:40px 0;}
+.wheel-svg{width:100%; max-width:360px; height:auto; display:block;}
+.month-grid{display:grid; grid-template-columns:1fr; gap:2px; margin-top:12px;}
+@media(min-width:560px){.month-grid{grid-template-columns:1fr 1fr;}}
+@media(min-width:860px){.month-grid{grid-template-columns:1fr 1fr 1fr;}}
+.month-card{background:var(--bg-panel); border-top:2px solid var(--gold); padding:20px 22px; transition:background 0.25s ease;}
+.month-card:hover{background:var(--bg-panel-2);}
+.month-card .mnum{font-family:var(--serif-display); font-size:12px; color:var(--blood-bright); letter-spacing:0.12em;}
+.month-card h3{font-size:18px; margin:6px 0 8px 0;}
+.month-card p{font-size:15px; margin:0; color:var(--muted);}
+</style>
 </head>
 <body>
 <div class="site-wrap">
@@ -40,10 +52,63 @@
     <div class="eyebrow">Летоисчисление</div>
     <h2>Летопись Ханрин</h2>
     <p>Все официальные даты Империи считаются по летописи Ханрин — начатой в год Раскола Крови. Текущий год двора — 347 Ханрин.</p>
-    <p>Год состоит из двенадцати месяцев, чьи имена звучат так, как звучало имя богини на языке, забытом самой Империей:</p>
-    <ul class="plain">
-      <li>Хансоль, Джиюн, Мингён, Соён, Хэран, Юджин, Кёуль, Тэян, Уёнг, Суён, Ынха, Арым</li>
-    </ul>
+    <p>Названия месяцев восходят к языку древних архивариусов трона — учёному наречию, вышедшему из обихода, но сохранившемуся в календаре и придворных указах. Двор находит его звучание подобающе торжественным; простой люд — попросту красивым.</p>
+
+    <div class="wheel-wrap">
+      <svg class="wheel-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="250" r="196" fill="none" stroke="#a9884f" stroke-width="1" opacity="0.35"/>
+        <circle cx="250" cy="250" r="150" fill="none" stroke="#a9884f" stroke-width="1" opacity="0.25"/>
+        <circle cx="250" cy="250" r="70" fill="#131009" stroke="#a9884f" stroke-width="1.2" opacity="0.6"/>
+
+        <g stroke="#a9884f" stroke-width="1" opacity="0.4">
+          <line x1="250" y1="80" x2="250" y2="100"/>
+          <line x1="347.5" y1="106.1" x2="332.6" y2="122.4"/>
+          <line x1="418.9" y1="177.5" x2="397.3" y2="185.6"/>
+          <line x1="445" y1="250" x2="420" y2="250"/>
+          <line x1="418.9" y1="322.5" x2="397.3" y2="314.4"/>
+          <line x1="347.5" y1="393.9" x2="332.6" y2="377.6"/>
+          <line x1="250" y1="420" x2="250" y2="400"/>
+          <line x1="152.5" y1="393.9" x2="167.4" y2="377.6"/>
+          <line x1="81.1" y1="322.5" x2="102.7" y2="314.4"/>
+          <line x1="55" y1="250" x2="80" y2="250"/>
+          <line x1="81.1" y1="177.5" x2="102.7" y2="185.6"/>
+          <line x1="152.5" y1="106.1" x2="167.4" y2="122.4"/>
+        </g>
+
+        <path d="M250 225 C250 236 240 237 240 246 C240 252 244 256 250 258 C256 256 260 252 260 246 C260 237 250 236 250 225Z" fill="#6e1420" stroke="#a01d2e" stroke-width="1"/>
+        <circle cx="250" cy="250" r="1.6" fill="#d4b06a"/>
+
+        <g font-family="Cinzel, serif" font-size="13" fill="#d4b06a" text-anchor="middle">
+          <text x="250" y="60">I</text>
+          <text x="360" y="88">II</text>
+          <text x="432" y="160">III</text>
+          <text x="463" y="255">IV</text>
+          <text x="432" y="350">V</text>
+          <text x="360" y="422">VI</text>
+          <text x="250" y="450">VII</text>
+          <text x="140" y="422">VIII</text>
+          <text x="68" y="350">IX</text>
+          <text x="37" y="255">X</text>
+          <text x="68" y="160">XI</text>
+          <text x="140" y="88">XII</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="month-grid">
+      <div class="month-card"><div class="mnum">I</div><h3>Сангинар</h3><p>Кровь земли пробуждается после зимнего сна — начало года.</p></div>
+      <div class="month-card"><div class="mnum">II</div><h3>Люминаль</h3><p>Дни удлиняются, свет возвращается в залы дворца.</p></div>
+      <div class="month-card"><div class="mnum">III</div><h3>Флориваль</h3><p>Цветение садов Пепла и Лозы, первые дипломатические визиты.</p></div>
+      <div class="month-card"><div class="mnum">IV</div><h3>Вентозар</h3><p>Ветра меняют направление — сезон дальних гонцов и вестей.</p></div>
+      <div class="month-card"><div class="mnum">V</div><h3>Розалин</h3><p>Месяц придворных балов, помолвок и брачных договоров.</p></div>
+      <div class="month-card"><div class="mnum">VI</div><h3>Эстивель</h3><p>Летний зной — дворец замирает в полуденной тишине.</p></div>
+      <div class="month-card"><div class="mnum">VII</div><h3>Мессидор</h3><p>Жатва по всей Империи, время податей и переписи земель.</p></div>
+      <div class="month-card"><div class="mnum">VIII</div><h3>Игнидор</h3><p>Месяц очистительных костров и публичных казней.</p></div>
+      <div class="month-card"><div class="mnum">IX</div><h3>Фруктидан</h3><p>Сбор последних плодов, закрытие торговых путей на зиму.</p></div>
+      <div class="month-card"><div class="mnum">X</div><h3>Брумаль</h3><p>Туманы окутывают столицу — время недосказанного.</p></div>
+      <div class="month-card"><div class="mnum">XI</div><h3>Фример</h3><p>Первые заморозки, горные перевалы закрываются до весны.</p></div>
+      <div class="month-card"><div class="mnum">XII</div><h3>Нивалис</h3><p>Снег и тишина — год умирает, чтобы Сангинар начал новый.</p></div>
+    </div>
   </section>
 
   <section class="reveal">
