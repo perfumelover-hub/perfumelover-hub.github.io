@@ -185,3 +185,21 @@ footer{padding:60px 0 100px 0; color:var(--muted); font-size:14.5px; font-style:
 /* simple map svg */
 .map-svg{width:100%; height:auto; display:block; margin:36px 0;}
 .map-label{font-family:var(--serif-body); font-size:12px; fill:#9c9186;}
+/* Запретить перенос слов по слогам */
+html,
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+li,
+span,
+div {
+    hyphens: none;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+
+    word-break: normal;
+    overflow-wrap: normal;
+}
