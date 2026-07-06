@@ -24,9 +24,6 @@
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
-	overflow-wrap: break-word;
-  word-break: normal;
-  white-space: normal;
   margin:0;
   background:
     radial-gradient(ellipse 900px 600px at 15% 0%, rgba(110,20,32,0.13), transparent 60%),
@@ -37,6 +34,14 @@ body{
   font-size:19px;
   line-height:1.7;
   overflow-x:hidden;
+  word-break:normal;
+  overflow-wrap:normal;
+  hyphens:none;
+}
+p, li, h1, h2, h3, h4, .callout, .hoverword, .bw-char{
+  word-break:normal;
+  overflow-wrap:normal;
+  hyphens:none;
 }
 ::selection{background:var(--blood-bright); color:var(--bone);}
 @media (prefers-reduced-motion: reduce){

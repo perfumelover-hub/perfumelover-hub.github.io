@@ -12,14 +12,60 @@
 <style>
 .wheel-wrap{display:flex; justify-content:center; margin:40px 0;}
 .wheel-svg{width:100%; max-width:360px; height:auto; display:block;}
-.month-grid{display:grid; grid-template-columns:1fr; gap:2px; margin-top:12px;}
-@media(min-width:560px){.month-grid{grid-template-columns:1fr 1fr;}}
-@media(min-width:860px){.month-grid{grid-template-columns:1fr 1fr 1fr;}}
-.month-card{background:var(--bg-panel); border-top:2px solid var(--gold); padding:20px 22px; transition:background 0.25s ease;}
-.month-card:hover{background:var(--bg-panel-2);}
-.month-card .mnum{font-family:var(--serif-display); font-size:12px; color:var(--blood-bright); letter-spacing:0.12em;}
-.month-card h3{font-size:18px; margin:6px 0 8px 0;}
-.month-card p{font-size:15px; margin:0; color:var(--muted);}
+.wheel-month{cursor:pointer; transition:fill 0.25s ease, filter 0.25s ease;}
+.wheel-month:hover, .wheel-month.active{fill:#ff5a63; filter:drop-shadow(0 0 5px rgba(160,29,46,0.7));}
+
+.panel-hint{font-size:14.5px; font-style:italic; color:var(--muted); margin-bottom:22px;}
+
+.month-interactive{display:flex; flex-direction:column; gap:2px;}
+@media(min-width:760px){.month-interactive{flex-direction:row; align-items:flex-start; gap:0;}}
+
+.month-chips{display:grid; grid-template-columns:repeat(2,1fr); gap:2px; flex:1 1 auto;}
+@media(min-width:480px){.month-chips{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:760px){.month-chips{grid-template-columns:repeat(2,1fr); max-width:340px;}}
+
+.month-chip{
+  display:flex; align-items:baseline; gap:10px;
+  width:100%;
+  background:var(--bg-panel); border:none; border-top:2px solid var(--gold);
+  padding:16px 16px; text-align:left; cursor:pointer;
+  font:inherit; font-family:var(--serif-body); color:var(--bone-dim);
+  appearance:none; -webkit-appearance:none; border-radius:0;
+  transition:background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.month-chip:focus{outline:2px solid var(--gold-bright); outline-offset:-2px;}
+.month-chip .chip-num{font-family:var(--serif-display); font-size:12px; color:var(--blood-bright); letter-spacing:0.1em; flex-shrink:0;}
+.month-chip .chip-name{font-size:16.5px; color:var(--bone);}
+.month-chip:hover, .month-chip.active{
+  background:var(--bg-panel-2);
+  transform:scale(1.045);
+  box-shadow:0 6px 22px rgba(160,29,46,0.22);
+  z-index:2;
+  position:relative;
+}
+.month-chip:hover .chip-name, .month-chip.active .chip-name{color:var(--gold-bright);}
+
+.month-panel{
+  flex:1 1 auto;
+  background:var(--bg-panel-2);
+  border-left:2px solid var(--blood-bright);
+  padding:26px 28px;
+  min-height:120px;
+  opacity:0.75;
+  transform:translateY(10px);
+  transition:opacity 0.4s ease, transform 0.4s ease;
+}
+@media(min-width:760px){
+  .month-panel{transform:translateX(18px); margin-left:2px;}
+  .month-panel.filled{transform:translateX(0);}
+}
+.month-panel.filled{opacity:1; transform:translateY(0);}
+.month-panel .panel-placeholder{color:var(--muted); font-style:italic; font-size:15px; margin:0;}
+.month-panel .panel-head{display:flex; align-items:baseline; gap:12px; margin-bottom:10px;}
+.month-panel .panel-num{font-family:var(--serif-display); color:var(--blood-bright); font-size:14px; letter-spacing:0.1em;}
+.month-panel h3{font-size:22px; margin:0;}
+.month-panel .panel-days{font-size:13.5px; letter-spacing:0.05em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:14px;}
+.month-panel p.panel-desc{font-size:16.5px; color:var(--bone-dim); margin:0;}
 </style>
 </head>
 <body>
@@ -79,35 +125,42 @@
         <circle cx="250" cy="250" r="1.6" fill="#d4b06a"/>
 
         <g font-family="Cinzel, serif" font-size="13" fill="#d4b06a" text-anchor="middle">
-          <text x="250" y="60">I</text>
-          <text x="360" y="88">II</text>
-          <text x="432" y="160">III</text>
-          <text x="463" y="255">IV</text>
-          <text x="432" y="350">V</text>
-          <text x="360" y="422">VI</text>
-          <text x="250" y="450">VII</text>
-          <text x="140" y="422">VIII</text>
-          <text x="68" y="350">IX</text>
-          <text x="37" y="255">X</text>
-          <text x="68" y="160">XI</text>
-          <text x="140" y="88">XII</text>
+          <text class="wheel-month" data-idx="0" x="250" y="60">I</text>
+          <text class="wheel-month" data-idx="1" x="360" y="88">II</text>
+          <text class="wheel-month" data-idx="2" x="432" y="160">III</text>
+          <text class="wheel-month" data-idx="3" x="463" y="255">IV</text>
+          <text class="wheel-month" data-idx="4" x="432" y="350">V</text>
+          <text class="wheel-month" data-idx="5" x="360" y="422">VI</text>
+          <text class="wheel-month" data-idx="6" x="250" y="450">VII</text>
+          <text class="wheel-month" data-idx="7" x="140" y="422">VIII</text>
+          <text class="wheel-month" data-idx="8" x="68" y="350">IX</text>
+          <text class="wheel-month" data-idx="9" x="37" y="255">X</text>
+          <text class="wheel-month" data-idx="10" x="68" y="160">XI</text>
+          <text class="wheel-month" data-idx="11" x="140" y="88">XII</text>
         </g>
       </svg>
     </div>
 
-    <div class="month-grid">
-      <div class="month-card"><div class="mnum">I</div><h3>Сангинар</h3><p>Кровь земли пробуждается после зимнего сна — начало года.</p></div>
-      <div class="month-card"><div class="mnum">II</div><h3>Люминаль</h3><p>Дни удлиняются, свет возвращается в залы дворца.</p></div>
-      <div class="month-card"><div class="mnum">III</div><h3>Флориваль</h3><p>Цветение садов Пепла и Лозы, первые дипломатические визиты.</p></div>
-      <div class="month-card"><div class="mnum">IV</div><h3>Вентозар</h3><p>Ветра меняют направление — сезон дальних гонцов и вестей.</p></div>
-      <div class="month-card"><div class="mnum">V</div><h3>Розалин</h3><p>Месяц придворных балов, помолвок и брачных договоров.</p></div>
-      <div class="month-card"><div class="mnum">VI</div><h3>Эстивель</h3><p>Летний зной — дворец замирает в полуденной тишине.</p></div>
-      <div class="month-card"><div class="mnum">VII</div><h3>Мессидор</h3><p>Жатва по всей Империи, время податей и переписи земель.</p></div>
-      <div class="month-card"><div class="mnum">VIII</div><h3>Игнидор</h3><p>Месяц очистительных костров и публичных казней.</p></div>
-      <div class="month-card"><div class="mnum">IX</div><h3>Фруктидан</h3><p>Сбор последних плодов, закрытие торговых путей на зиму.</p></div>
-      <div class="month-card"><div class="mnum">X</div><h3>Брумаль</h3><p>Туманы окутывают столицу — время недосказанного.</p></div>
-      <div class="month-card"><div class="mnum">XI</div><h3>Фример</h3><p>Первые заморозки, горные перевалы закрываются до весны.</p></div>
-      <div class="month-card"><div class="mnum">XII</div><h3>Нивалис</h3><p>Снег и тишина — год умирает, чтобы Сангинар начал новый.</p></div>
+    <p class="panel-hint">Наведите курсор на месяц — название в списке или число на колесе — либо коснитесь его на телефоне, чтобы увидеть число дней и описание.</p>
+
+    <div class="month-interactive">
+      <div class="month-chips" id="monthChips">
+        <button class="month-chip" data-idx="0"><span class="chip-num">I</span><span class="chip-name">Сангинар</span></button>
+        <button class="month-chip" data-idx="1"><span class="chip-num">II</span><span class="chip-name">Люминаль</span></button>
+        <button class="month-chip" data-idx="2"><span class="chip-num">III</span><span class="chip-name">Флориваль</span></button>
+        <button class="month-chip" data-idx="3"><span class="chip-num">IV</span><span class="chip-name">Вентозар</span></button>
+        <button class="month-chip" data-idx="4"><span class="chip-num">V</span><span class="chip-name">Розалин</span></button>
+        <button class="month-chip" data-idx="5"><span class="chip-num">VI</span><span class="chip-name">Эстивель</span></button>
+        <button class="month-chip" data-idx="6"><span class="chip-num">VII</span><span class="chip-name">Мессидор</span></button>
+        <button class="month-chip" data-idx="7"><span class="chip-num">VIII</span><span class="chip-name">Игнидор</span></button>
+        <button class="month-chip" data-idx="8"><span class="chip-num">IX</span><span class="chip-name">Фруктидан</span></button>
+        <button class="month-chip" data-idx="9"><span class="chip-num">X</span><span class="chip-name">Брумаль</span></button>
+        <button class="month-chip" data-idx="10"><span class="chip-num">XI</span><span class="chip-name">Фример</span></button>
+        <button class="month-chip" data-idx="11"><span class="chip-num">XII</span><span class="chip-name">Нивалис</span></button>
+      </div>
+      <div class="month-panel" id="monthPanel">
+        <p class="panel-placeholder">Здесь появится число дней и описание выбранного месяца.</p>
+      </div>
     </div>
   </section>
 
@@ -133,5 +186,63 @@
 
 </div>
 <script src="script.js"></script>
+<script>
+(function(){
+  var months = [
+    {roman:"I", name:"Сангинар", days:31, desc:"Кровь земли пробуждается после зимнего сна — начало года."},
+    {roman:"II", name:"Люминаль", days:28, desc:"Дни удлиняются, свет возвращается в залы дворца."},
+    {roman:"III", name:"Флориваль", days:31, desc:"Цветение садов Пепла и Лозы, первые дипломатические визиты."},
+    {roman:"IV", name:"Вентозар", days:30, desc:"Ветра меняют направление — сезон дальних гонцов и вестей."},
+    {roman:"V", name:"Розалин", days:31, desc:"Месяц придворных балов, помолвок и брачных договоров."},
+    {roman:"VI", name:"Эстивель", days:30, desc:"Летний зной — дворец замирает в полуденной тишине."},
+    {roman:"VII", name:"Мессидор", days:31, desc:"Жатва по всей Империи, время податей и переписи земель."},
+    {roman:"VIII", name:"Игнидор", days:31, desc:"Месяц очистительных костров и публичных казней."},
+    {roman:"IX", name:"Фруктидан", days:30, desc:"Сбор последних плодов, закрытие торговых путей на зиму."},
+    {roman:"X", name:"Брумаль", days:31, desc:"Туманы окутывают столицу — время недосказанного."},
+    {roman:"XI", name:"Фример", days:30, desc:"Первые заморозки, горные перевалы закрываются до весны."},
+    {roman:"XII", name:"Нивалис", days:31, desc:"Снег и тишина — год умирает, чтобы Сангинар начал новый."}
+  ];
+
+  function daysWord(n){
+    var m = n % 100;
+    if(m >= 11 && m <= 14) return "дней";
+    var d = m % 10;
+    if(d === 1) return "день";
+    if(d >= 2 && d <= 4) return "дня";
+    return "дней";
+  }
+
+  var panel = document.getElementById('monthPanel');
+  var chips = document.querySelectorAll('.month-chip');
+  var wheelMonths = document.querySelectorAll('.wheel-month');
+  if(!panel) return;
+
+  function selectMonth(idx){
+    var m = months[idx];
+    if(!m) return;
+    panel.innerHTML =
+      '<div class="panel-head"><span class="panel-num">' + m.roman + '</span><h3>' + m.name + '</h3></div>' +
+      '<div class="panel-days">' + m.days + ' ' + daysWord(m.days) + ' в месяце</div>' +
+      '<p class="panel-desc">' + m.desc + '</p>';
+    panel.classList.add('filled');
+
+    chips.forEach(function(c){ c.classList.toggle('active', c.dataset.idx === String(idx)); });
+    wheelMonths.forEach(function(w){ w.classList.toggle('active', w.dataset.idx === String(idx)); });
+  }
+
+  chips.forEach(function(chip){
+    var idx = chip.dataset.idx;
+    chip.addEventListener('mouseenter', function(){ selectMonth(idx); });
+    chip.addEventListener('focus', function(){ selectMonth(idx); });
+    chip.addEventListener('click', function(){ selectMonth(idx); });
+  });
+
+  wheelMonths.forEach(function(w){
+    var idx = w.dataset.idx;
+    w.addEventListener('mouseenter', function(){ selectMonth(idx); });
+    w.addEventListener('click', function(){ selectMonth(idx); });
+  });
+})();
+</script>
 </body>
 </html>

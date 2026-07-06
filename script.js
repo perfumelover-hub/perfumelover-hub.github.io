@@ -22,9 +22,13 @@ function initBloodText(){
     block.textContent = '';
     block.setAttribute('aria-label', text);
     [...text].forEach((ch, i)=>{
+      if(ch === ' '){
+        block.appendChild(document.createTextNode(' '));
+        return;
+      }
       const span = document.createElement('span');
       span.className = 'bw-char';
-      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      span.textContent = ch;
       if(!reduced){ span.style.animationDelay = (i * 0.018) + 's'; }
       else { span.style.opacity = '1'; span.style.color = 'var(--bone-dim)'; }
       block.appendChild(span);
