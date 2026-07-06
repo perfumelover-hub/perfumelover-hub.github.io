@@ -21,17 +21,28 @@ function initBloodText(){
     const text = block.textContent;
     block.textContent = '';
     block.setAttribute('aria-label', text);
-    [...text].forEach((ch, i)=>{
-      if(ch === ' '){
-        block.appendChild(document.createTextNode(' '));
-        return;
+
+    const words = text.split(' ');
+    let i = 0;
+    words.forEach((word, wIdx)=>{
+      if(word.length){
+        const wordSpan = document.createElement('span');
+        wordSpan.className = 'bw-word';
+        [...word].forEach(ch=>{
+          const span = document.createElement('span');
+          span.className = 'bw-char';
+          span.textContent = ch;
+          if(!reduced){ span.style.animationDelay = (i * 0.018) + 's'; }
+          else { span.style.opacity = '1'; span.style.color = 'var(--bone-dim)'; }
+          wordSpan.appendChild(span);
+          i++;
+        });
+        block.appendChild(wordSpan);
       }
-      const span = document.createElement('span');
-      span.className = 'bw-char';
-      span.textContent = ch;
-      if(!reduced){ span.style.animationDelay = (i * 0.018) + 's'; }
-      else { span.style.opacity = '1'; span.style.color = 'var(--bone-dim)'; }
-      block.appendChild(span);
+      if(wIdx < words.length - 1){
+        block.appendChild(document.createTextNode(' '));
+        i++;
+      }
     });
   });
 

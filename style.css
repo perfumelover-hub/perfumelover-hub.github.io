@@ -144,6 +144,7 @@ footer{padding:60px 0 100px 0; color:var(--muted); font-size:14.5px; font-style:
 
 /* blood-write narrative effect */
 .blood-text{font-family:var(--serif-body); font-size:19px; font-style:italic;}
+.bw-word{display:inline-block; white-space:nowrap;}
 .blood-text .bw-char{opacity:0; color:var(--blood-bright); display:inline-block;
   animation:bwreveal 1.1s ease forwards;}
 @keyframes bwreveal{
